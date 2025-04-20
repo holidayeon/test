@@ -13,24 +13,24 @@ dataset = load_dataset("mlabonne/smoltldr")
 print(dataset)
 
 model_id = "Qwen/Qwen2.5-1.5B"
-model = AutoModelForCausalLM.from_pretrained(
-    model_id,
-    torch_dtype="auto",
-    device_map="auto",
-    attn_implementation="flash_attention_2",
-    token=hf_token
-)
-tokenizer = AutoTokenizer.from_pretrained(model_id)
+# model = AutoModelForCausalLM.from_pretrained(
+#     model_id,
+#     torch_dtype="auto",
+#     device_map="auto",
+#     attn_implementation="flash_attention_2",
+#     token=hf_token
+# )
+# tokenizer = AutoTokenizer.from_pretrained(model_id)
 
-# Load LoRA
-lora_config = LoraConfig(
-    task_type="CAUSAL_LM",
-    r=16,
-    lora_alpha=32,
-    target_modules="all-linear",
-)
-model = get_peft_model(model, lora_config)
-print(model.print_trainable_parameters())
+# # Load LoRA
+# lora_config = LoraConfig(
+#     task_type="CAUSAL_LM",
+#     r=16,
+#     lora_alpha=32,
+#     target_modules="all-linear",
+# )
+# model = get_peft_model(model, lora_config)
+# print(model.print_trainable_parameters())
 
 # Reward function
 ideal_length = 50
@@ -60,7 +60,7 @@ training_args = GRPOConfig(
 
 # Trainer
 trainer = GRPOTrainer(
-    model=model,
+    model=model_id,
     reward_funcs=[reward_len],
     args=training_args,
     train_dataset=dataset["train"],
