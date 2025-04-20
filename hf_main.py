@@ -48,14 +48,6 @@ training_args = GRPOConfig(
     bf16=True,
     remove_unused_columns=False,
     logging_steps=1,
-    fsdp="full_shard",  # Enable full sharding
-        fsdp_transformer_layer_cls_to_wrap="QWenBlock",  # Specify the transformer block class to wrap
-        fsdp_config={
-            "fsdp_offload_params": False,  # Set to True if GPU memory is limited
-            "fsdp_backward_prefetch": "backward_pre",  # Can be 'backward_pre' or 'backward_post'
-            "fsdp_forward_prefetch": True,
-            "fsdp_min_num_params": 1e6,  # Only wrap modules with > 1M params
-        },
 )
 
 # Trainer
