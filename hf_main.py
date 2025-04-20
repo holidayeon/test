@@ -11,7 +11,7 @@ hf_token = os.environ['HF_TOKEN']
 dataset = load_dataset("mlabonne/smoltldr")
 print(dataset)
 
-model_id = "Qwen/Qwen2.5-3B-Instruct"
+model_id = "Qwen/Qwen2.5-1.5B"
 model = AutoModelForCausalLM.from_pretrained(
     model_id,
     torch_dtype="auto",
@@ -55,8 +55,9 @@ training_args = GRPOConfig(
     optim="adamw_8bit",
     num_train_epochs=1,
     bf16=True,
-    # report_to=["wandb"],
+    report_to=["wandb"],
     remove_unused_columns=False,
+    log_completions=True,
     logging_steps=1,
     fsdp="full_shard",
     # fsdp_config=fsdp_config
@@ -71,7 +72,7 @@ trainer = GRPOTrainer(
 )
 
 # Train model
-# wandb.init(project="GRPO")
+wandb.init(project="GRPO")
 trainer.train()
 
 prompt = """
