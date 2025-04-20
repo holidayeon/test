@@ -1,10 +1,10 @@
 # Huggingface;  https://huggingface.co/learn/llm-course/en/chapter12/5?fw=pt#practical-exercise-fine-tune-a-model-with-grpo
 import torch
+import os
 from datasets import load_dataset
 from peft import LoraConfig, get_peft_model
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from trl import GRPOConfig, GRPOTrainer
-from os import environ
 
 hf_token = os.environ['HF_TOKEN']
 
