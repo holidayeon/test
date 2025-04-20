@@ -39,11 +39,6 @@ ideal_length = 50
 def reward_len(completions, **kwargs):
     return [-abs(ideal_length - len(completion)) for completion in completions]
 
-fsdp_config = {
-    # "fsdp_auto_wrap_policy": "TRANSFPRMER_BASED_WRAP",
-    "fsdp_transformer_layer_cls_to_wrap": ["Gemma3DecoderLayer"]
-}
-
 # Training arguments
 training_args = GRPOConfig(
     output_dir="GRPO",
@@ -56,12 +51,11 @@ training_args = GRPOConfig(
     optim="adamw_8bit",
     num_train_epochs=1,
     bf16=True,
+    gradient_checkpointing=True,
     report_to=["wandb"],
     remove_unused_columns=False,
     # log_completions=True,
     logging_steps=1,
-    fsdp="full_shard",
-    # fsdp_config=fsdp_config
 )
 
 # Trainer
