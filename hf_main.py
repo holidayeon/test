@@ -13,7 +13,7 @@ print(dataset)
 model_id = "Qwen/Qwen2.5-3B-Instruct"
 model = AutoModelForCausalLM.from_pretrained(
     model_id,
-    device_map="auto",
+    device_map="balanced",
     attn_implementation="flash_attention_2",
 )
 tokenizer = AutoTokenizer.from_pretrained(model_id)
