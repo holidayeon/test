@@ -59,7 +59,7 @@ training_args = GRPOConfig(
     remove_unused_columns=False,
     logging_steps=1,
     fsdp="full_shard",
-    fsdp_config=fsdp_config
+    # fsdp_config=fsdp_config
 )
 
 # Trainer
