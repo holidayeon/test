@@ -46,7 +46,6 @@ training_args = GRPOConfig(
     optim="adamw_8bit",
     num_train_epochs=1,
     bf16=True,
-    gradient_checkpointing=True,
     remove_unused_columns=False,
     logging_steps=1,
     fsdp="full_shard",  # Enable full sharding
