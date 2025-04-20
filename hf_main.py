@@ -3,7 +3,7 @@ import torch
 import os
 from datasets import load_dataset
 from peft import LoraConfig, get_peft_model
-from transformers import Gemma3ForCausalLM, AutoTokenizer
+from transformers import Gemma3TextModel, AutoTokenizer
 from trl import GRPOConfig, GRPOTrainer
 
 hf_token = os.environ['HF_TOKEN']
@@ -12,7 +12,7 @@ dataset = load_dataset("mlabonne/smoltldr")
 print(dataset)
 
 model_id = "google/gemma-3-4b-it"
-model = Gemma3ForCausalLM.from_pretrained(
+model = Gemma3TextModel.from_pretrained(
     model_id,
     torch_dtype="auto",
     device_map="auto",
