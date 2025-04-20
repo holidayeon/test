@@ -47,11 +47,11 @@ fsdp_config = {
 training_args = GRPOConfig(
     output_dir="GRPO",
     learning_rate=2e-5,
-    per_device_train_batch_size=8,
+    per_device_train_batch_size=4,
     gradient_accumulation_steps=2,
     max_prompt_length=512,
     max_completion_length=96,
-    num_generations=8,
+    num_generations=4,
     optim="adamw_8bit",
     num_train_epochs=1,
     bf16=True,
@@ -59,7 +59,7 @@ training_args = GRPOConfig(
     remove_unused_columns=False,
     logging_steps=1,
     fsdp="full_shard",
-    fsdp_config=fsdp_config
+    # fsdp_config=fsdp_config
 )
 
 # Trainer
