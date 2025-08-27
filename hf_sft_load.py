@@ -9,7 +9,7 @@ from trl import SFTTrainer, SFTConfig, setup_chat_format
 # Test loading the saved model =================================================
 print("Testing model loading...")
 from peft import PeftModel
-model_id = "Qwen/Qwen2.5-3B-Instruct"
+model_id = "Qwen/Qwen3-0.6B"
 
 # Load base model
 base_model = AutoModelForCausalLM.from_pretrained(

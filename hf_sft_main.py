@@ -9,7 +9,7 @@ from trl import SFTTrainer, SFTConfig, setup_chat_format
 dataset = load_dataset("mlabonne/smoltldr")
 print(dataset)
 
-model_id = "Qwen/Qwen2.5-3B-Instruct"
+model_id = "Qwen/Qwen3-0.6B"
 model = AutoModelForCausalLM.from_pretrained(
     model_id,
     attn_implementation="flash_attention_2",
@@ -57,6 +57,7 @@ training_args = TrainingArguments(
     per_device_train_batch_size=2,
     per_device_eval_batch_size=2,
     gradient_accumulation_steps=4,
+    max_seq_length=1024, # maximum packed length
     optim="adamw_torch",
     save_steps=500,
     logging_steps=10,
@@ -80,7 +81,6 @@ trainer = SFTTrainer(
     train_dataset=dataset["train"],
     args=training_args,
     processing_class=tokenizer,
-    max_seq_length=1024, # maximum packed length
     packing=True
 )
 
