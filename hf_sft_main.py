@@ -51,13 +51,13 @@ def format_prompts(examples):
 
 
 # Training arguments with FSDP configuration
-training_args = TrainingArguments(
+training_args = SFTConfig(
     output_dir="./results",
     num_train_epochs=2,
+    max_length=512,
     per_device_train_batch_size=2,
     per_device_eval_batch_size=2,
     gradient_accumulation_steps=4,
-    max_seq_length=1024, # maximum packed length
     optim="adamw_torch",
     save_steps=500,
     logging_steps=10,
@@ -81,7 +81,6 @@ trainer = SFTTrainer(
     train_dataset=dataset["train"],
     args=training_args,
     processing_class=tokenizer,
-    packing=True
 )
 
 print(trainer.model.modules)
