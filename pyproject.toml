@@ -3,12 +3,15 @@ name = "grpo"
 version = "0.1.0"
 description = ""
 authors = [{ name = "None" }]
-requires-python = ">=3.13"
+requires-python = ">=3.11, <3.14"
 dependencies = [
     "datasets (>=3.5.0,<4.0.0)",
     "transformers (>=4.51.3,<5.0.0)",
     "trl (>=0.16.1,<0.17.0)",
     "peft (>=0.15.2,<0.16.0)",
     "accelerate (>=1.6.0,<2.0.0)",
+    "torch (>=2.8.0,<3.0.0)",
 ]
+
+[tool.poetry]
 package-mode = false
