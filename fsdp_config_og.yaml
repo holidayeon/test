@@ -1,0 +1,34 @@
+compute_environment: LOCAL_MACHINE
+distributed_type: FSDP
+debug: true
+num_processes: 2 # GPU 개수
+num_machines: 1
+machine_rank: 0
+main_process_ip: null
+# main_process_port: 29500
+mixed_precision: "bf16" # 코드의 bf16와 일치
+use_cpu: false
+fsdp_config:
+  # fsdp_auto_wrap_policy: TRANSFORMER_BASED_WRAP
+  # sharding_strategy: FULL_SHARD
+  # # min_num_params: 10000000  # fsdp_min_num_params
+  # activation_checkpointing: true
+  # activation_checkpointing_reentrant: false
+  # checkpoint_impl: "no_reentrant"
+  # fsdp_state_dict_type: SHARDED_STATE_DICT
+  # use_orig_param: false
+  # cpu_offload: false        # 메모리 더 부족하면 true 고려
+  fsdp_auto_wrap_policy: TRANSFORMER_BASED_WRAP
+  fsdp_transformer_layer_cls_to_wrap: Qwen3DecoderLayer
+  fsdp_forward_prefetch: false
+  fsdp_backward_prefetch: BACKWARD_PRE
+  fsdp_offload_params: false
+  fsdp_sharding_strategy: FULL_SHARD
+  fsdp_state_dict_type: SHARDED_STATE_DICT
+  fsdp_cpu_ram_efficient_loading: false
+  fsdp_sync_module_states: true
+  fsdp_use_orig_params: true
+  offload_to_cpu: true # rank0 CPU 모아 저장
+  # cpu_offload: true          # Enable CPU offloading
+  # offload_params: true       # Offload parameters to CPU
+  # offload_optimizer: true    # Offload optimizer states to CPU
